@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/dunnotoo.iml" filepath="$PROJECT_DIR$/.idea/modules/dunnotoo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/dunnotoo_main.iml" filepath="$PROJECT_DIR$/.idea/modules/dunnotoo_main.iml" group="dunnotoo" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/dunnotoo_test.iml" filepath="$PROJECT_DIR$/.idea/modules/dunnotoo_test.iml" group="dunnotoo" />
+    </modules>
+  </component>
+</project>
