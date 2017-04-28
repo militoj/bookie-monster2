@@ -5,5 +5,5 @@ package org.launchcode.models.data;
  */
 public class Keys {
 
-    String myKey = "123456";
+    String myKey = "so secret";
 }
