@@ -16,5 +16,8 @@ dependencies {
     compile group: 'org.springframework', name: 'spring-core', version: '4.3.8.RELEASE'
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '1.5.3.RELEASE'
+    // https://mvnrepository.com/artifact/javax.xml/jaxp-api
+    compile group: 'javax.xml', name: 'jaxp-api', version: '1.4'
+
 }
 ;

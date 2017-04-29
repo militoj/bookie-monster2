@@ -6,7 +6,6 @@ import com.jaunt.UserAgent;
 import com.jaunt.component.*;
 import org.launchcode.models.Book;
 
-import java.io.*;
 import java.util.*;
 
 
@@ -48,7 +47,7 @@ public class Scraper {
             String fileName = System.getProperty("user.home")+"/git/bookies-revenge/src/main/resources/book_data.csv";
 //            String fileName = "book_data.csv";
 
-            CsvFileReader.readCsvFile(fileName);
+            BookDataImporter.readCsvFile(fileName);
 
 
         } catch (JauntException e) {                                     //if an HTTP/connection error occurs, handle JauntException.

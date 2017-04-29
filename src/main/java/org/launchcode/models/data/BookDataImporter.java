@@ -1,80 +1,85 @@
 package org.launchcode.models.data;
 
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVParser;
-import org.apache.commons.csv.CSVRecord;
-import org.launchcode.models.*;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
-
+import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVParser;
+import org.apache.commons.csv.CSVRecord;
+import org.launchcode.models.Book;
 
 /**
- * Created by LaunchCode
+ * Created by johnmilito on 4/24/17.
  */
+//Borrowed from https://examples.javacodegeeks.com/core-java/apache/commons/csv-commons/writeread-csv-files-with-apache-commons-csv-example/
 public class BookDataImporter {
 
-    private static final String DATA_FILE = "book_data.csv";
-    private static boolean isDataLoaded = false;
+    //CSV file header
+    private static final String [] FILE_HEADER_MAPPING = {"EAN","Quantity","Price","created_date"};
+
+    //Student attributes
+    private static final String EAN = "EAN";
+    private static final String QUANTITY = "Quantity";
+    private static final String PRICE = "Price";
+    private static final String CREATED_DATE = "created_date";
+
+    private static String buyer_name = "Chegg";
+
+    //String fileName = "book_data.csv";
 
     static ArrayList<Book> importedBooks = new ArrayList<Book>();
 
 
-    /**
-     * Read in data from a CSV file and store it in a list
-     */
-    static void loadData() {
 
-        // Only load data once
-        if (isDataLoaded) {
-            return;
-        }
+    public static void readCsvFile(String fileName) {
+
+        FileReader fileReader = null;
+
+        CSVParser csvFileParser = null;
+
+        //Create the CSVFormat object with the header mapping
+        CSVFormat csvFileFormat = CSVFormat.DEFAULT.withHeader(FILE_HEADER_MAPPING);
 
         try {
 
-            // Open the CSV file and set up pull out column header info and records
-            Resource resource = new ClassPathResource(DATA_FILE);
-            InputStream is = resource.getInputStream();
-            Reader reader = new InputStreamReader(is);
-            CSVParser parser = CSVFormat.RFC4180.withFirstRecordAsHeader().parse(reader);
-            List<CSVRecord> records = parser.getRecords();
-            Integer numberOfColumns = records.get(0).size();
-            String[] headers = parser.getHeaderMap().keySet().toArray(new String[numberOfColumns]);
+            //Create a new list of student to be filled by CSV file data
+            List students = new ArrayList();
 
-            // Put the records into a more friendly format
-            for (CSVRecord record : records) {
+            //initialize FileReader object
+            fileReader = new FileReader(fileName);
 
-                String buyer_name = "Chegg";
+            //initialize CSVParser object
+            csvFileParser = new CSVParser(fileReader, csvFileFormat);
 
-                String empStr = record.get("isbn");
-                Long isbnLong = Long.parseLong(empStr);
+            //Get a list of CSV file records
+            List csvRecords = csvFileParser.getRecords();
 
-                String locStr = record.get("quantity");
-                int quantityInt = Integer.parseInt(locStr);
-
-                String coreCompStr = record.get("price");
-                int priceInt = Integer.parseInt(coreCompStr);
-
-                Book newBook = new Book(buyer_name, isbnLong, quantityInt, priceInt);
-
-                importedBooks.add(newBook);
+            //Read the CSV file records starting from the second record to skip the header
+            for (int i = 1; i < csvRecords.size(); i++) {
+                CSVRecord record = (CSVRecord) csvRecords.get(i);
+                //Create a new student object and fill his data
+                Book abook = new Book(buyer_name, Long.parseLong(record.get(EAN)), Integer.parseInt(record.get(QUANTITY)), Double.parseDouble(record.get(PRICE)));
+                importedBooks.add(abook);
             }
 
-            System.out.print(importedBooks.get(1).getISBN());
+            System.out.print(importedBooks.get(8).getPrice());
 
-            // flag the data as loaded, so we don't do it twice
-            isDataLoaded = true;
-
-        } catch (IOException e) {
-            System.out.println("Failed to load book data");
-            e.printStackTrace();
         }
+        catch (Exception e) {
+            System.out.println("Error in BookDataImporter !!!");
+            e.printStackTrace();
+        } finally {
+            try {
+                fileReader.close();
+                csvFileParser.close();
+            } catch (IOException e) {
+                System.out.println("Error while closing fileReader/csvFileParser !!!");
+                e.printStackTrace();
+            }
+        }
+
     }
 
 }
