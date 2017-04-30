@@ -55,6 +55,14 @@ public class Book {
 
     }
 
+    public double getAmazon_price() {
+        return amazon_price;
+    }
+
+    public void setAmazon_price(double amazon_price) {
+        this.amazon_price = amazon_price;
+    }
+
     public String getBuyer_name() {
         return buyer_name;
     }

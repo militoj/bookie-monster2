@@ -24,7 +24,7 @@ public class BookDataWriter {
         private static final String NEW_LINE_SEPARATOR = "\n";
 
         //CSV file header
-        private static final Object [] FILE_HEADER = {"id","firstName","lastName","gender","age"};
+        private static final Object [] FILE_HEADER = {"id","quantity","isbn","price","amazon price"};
 
         public static void writeCsvFile(String fileName) {
 
@@ -54,11 +54,11 @@ public class BookDataWriter {
                 //Write a new student object list to the CSV file
                 for (Book book : booksToWrite) {
                     List bookDataRecord = new ArrayList();
-                    bookDataRecord.add(String.valueOf(book.getId()));
-                    bookDataRecord.add(book.getFirstName());
-                    bookDataRecord.add(book.getLastName());
-                    bookDataRecord.add(book.getGender());
-                    bookDataRecord.add(String.valueOf(student.getAge()));
+                    bookDataRecord.add(book.getBuyer_name());
+                    bookDataRecord.add(String.valueOf(book.getQuantity()));
+                    bookDataRecord.add(String.valueOf(book.getISBN()));
+                    bookDataRecord.add(String.valueOf(book.getPrice()));
+                    bookDataRecord.add(String.valueOf(book.getAmazon_price()));
                     csvFilePrinter.printRecord(bookDataRecord);
                 }
 
