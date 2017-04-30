@@ -15,22 +15,16 @@ import org.launchcode.models.Book;
 //Borrowed from https://examples.javacodegeeks.com/core-java/apache/commons/csv-commons/writeread-csv-files-with-apache-commons-csv-example/
 public class BookDataWriter {
 
-
-
-
-
-
         //Delimiter used in CSV file
         private static final String NEW_LINE_SEPARATOR = "\n";
 
         //CSV file header
         private static final Object [] FILE_HEADER = {"id","quantity","isbn","price","amazon price"};
 
-        public static void writeCsvFile(String fileName) {
+        public static void writeCsvFile(String fileName, ArrayList<Book> booksToWrite) {
 
 
             //Create a new list of student objects
-            List <Book> booksToWrite = BookDataImporter.importedBooks;
 
 
             FileWriter fileWriter = null;

@@ -29,7 +29,7 @@ public class BookDataImporter {
 
     //String fileName = "book_data.csv";
 
-    static ArrayList<Book> importedBooks = new ArrayList<Book>();
+    public static ArrayList<Book> importedBooks = new ArrayList<Book>();
 
 
 
@@ -64,8 +64,6 @@ public class BookDataImporter {
                 importedBooks.add(abook);
             }
 
-            System.out.print(importedBooks.get(8).getPrice());
-
         }
         catch (Exception e) {
             System.out.println("Error in BookDataImporter !!!");
@@ -82,4 +80,9 @@ public class BookDataImporter {
 
     }
 
-}
+    public static ArrayList<Book> toList() {
+
+        return importedBooks;
+    }
+
+    }

@@ -15,7 +15,10 @@ import java.util.*;
 // Learned how to use Jaunt at http://jaunt-api.com/jaunt-tutorial.htm
 public class Scraper {
 
-    public static void main(String[]args) {
+    public static ArrayList<Book> scrapedBooks = new ArrayList<Book>();
+
+
+    public static void main() {
         try {
             UserAgent userAgent = new UserAgent();                       //create new userAgent (headless browser).
             userAgent.visit("http://www.cash4books.net/recent500.php");                    //visit a url
@@ -23,7 +26,6 @@ public class Scraper {
             Table table = userAgent.doc.getTable(0);
 
 
-            ArrayList<Book> scrapedBooks = new ArrayList<Book>();
 
 
             int count = 1;
@@ -55,5 +57,10 @@ public class Scraper {
         }
     }
 
+
+    public static ArrayList<Book> toList() {
+
+        return scrapedBooks;
+    }
 
 }
