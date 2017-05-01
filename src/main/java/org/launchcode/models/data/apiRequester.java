@@ -1,12 +1,18 @@
 package org.launchcode.models.data;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import com.jaunt.UserAgent;
+import com.jaunt.JauntException;
+
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.launchcode.models.Book;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
@@ -42,7 +48,7 @@ public class apiRequester {
          */
         private static final String ENDPOINT = "webservices.amazon.com";
 
-        public static void main(String[] args) {
+        public static void urlMaker(ArrayList<Book> booksToWrite) {
 
         /*
          * Set up the signed requests helper.
@@ -58,23 +64,34 @@ public class apiRequester {
 
             String requestUrl = null;
 
-            Map<String, String> params = new HashMap<String, String>();
+            for (Book book: booksToWrite) {
 
-            params.put("Service", "AWSECommerceService");
-            params.put("Operation", "ItemLookup");
-            params.put("AWSAccessKeyId", "AKIAIUR4GW36IFSL4Y6A");
-            params.put("AssociateTag", "book05b3-20");
-            params.put("ItemId", "9780030968358");
-            params.put("IdType", "ISBN");
-            params.put("ResponseGroup", "ItemAttributes,Offers");
-            params.put("Condition", "Used");
-            params.put("SearchIndex", "Books");
+                Map<String, String> params = new HashMap<String, String>();
 
-            requestUrl = helper.sign(params);
+                params.put("Service", "AWSECommerceService");
+                params.put("Operation", "ItemLookup");
+                params.put("AWSAccessKeyId", "AKIAIUR4GW36IFSL4Y6A");
+                params.put("AssociateTag", "book05b3-20");
+                params.put("ItemId", String.valueOf(book.getISBN()));
+                params.put("IdType", "ISBN");
+                params.put("ResponseGroup", "ItemAttributes,Offers");
+                params.put("Condition", "Used");
+                params.put("SearchIndex", "Books");
 
-            System.out.println("Signed URL: \"" + requestUrl + "\"");
+                requestUrl = helper.sign(params);
+
+                try{
+                    UserAgent userAgent = new UserAgent();         //create new userAgent (headless browser).
+                    userAgent.sendGET(requestUrl);   //send request
+                    System.out.println(userAgent.doc.innerXML());            //print the retrieved JSON object
+                    System.out.println(userAgent.doc.findFirst("LowestUsedPrice").innerXML());            //print the retrieved JSON object
+
+                }
+                catch(JauntException e){         //if an HTTP/connection error occurs, handle JauntException.
+                    System.err.println(e);
+                }
+            }
         }
-
 
 
 }
