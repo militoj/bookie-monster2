@@ -70,7 +70,10 @@ public class apiRequester {
 
             String requestUrl = null;
 
-            for (Book book: bookList) {
+        System.out.println("Me want Bookie!!");
+
+
+        for (Book book: bookList) {
 
                 Map<String, String> params = new HashMap<String, String>();
 
