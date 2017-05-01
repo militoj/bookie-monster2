@@ -92,8 +92,15 @@ public class apiRequester {
                     UserAgent userAgent = new UserAgent();         //create new userAgent (headless browser).
                     userAgent.sendGET(requestUrl);   //send request
 
+                    System.out.println(userAgent.doc.findFirst("LowestUsedPrice"));
+
                     price = userAgent.doc.findFirst("LowestUsedPrice").findFirst("FormattedPrice").innerXML();
                     Thread.sleep(1000);
+
+                    String[] priceNoDollSign = price.split("\\$");
+                    double priceDouble = Double.parseDouble(priceNoDollSign[1]);
+
+                    book.setAmazon_price(priceDouble);
                 }
                 catch(JauntException e){         //if an HTTP/connection error occurs, handle JauntException.
                     System.err.println(e);
@@ -101,11 +108,15 @@ public class apiRequester {
                 catch (InterruptedException e) {
                      System.err.println(e);
                 }
+                catch (NullPointerException e) {
+                    continue;
+                }
+                catch (ArrayIndexOutOfBoundsException e) {
+                    continue;
+                }
 
-                String[] priceNoDollSign = price.split("\\$");
-                double priceDouble = Double.parseDouble(priceNoDollSign[1]);
 
-                book.setAmazon_price(priceDouble);
+
 
             }
         }
