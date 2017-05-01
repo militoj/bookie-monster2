@@ -92,7 +92,7 @@ public class apiRequester {
                     UserAgent userAgent = new UserAgent();         //create new userAgent (headless browser).
                     userAgent.sendGET(requestUrl);   //send request
 
-                    System.out.println(userAgent.doc.findFirst("LowestUsedPrice"));
+                    System.out.println(book.getISBN()+", Om Nom Nom Nom!!");
 
                     price = userAgent.doc.findFirst("LowestUsedPrice").findFirst("FormattedPrice").innerXML();
                     Thread.sleep(1000);
