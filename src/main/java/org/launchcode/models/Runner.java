@@ -29,10 +29,12 @@ public class Runner {
 
         firstList.addAll(secondList);
 
-
-        BookDataWriter.writeCsvFile("/Users/johnmilito/git/bookies-revenge/src/main/resources/BookFileNew.csv", firstList);
-
         apiRequester.urlMaker(testList);
+
+
+        BookDataWriter.writeCsvFile("/Users/johnmilito/git/bookies-revenge/src/main/resources/BookFileNew.csv", testList);
+
+
 
 
     }

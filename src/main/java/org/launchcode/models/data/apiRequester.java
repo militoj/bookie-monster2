@@ -80,16 +80,24 @@ public class apiRequester {
 
                 requestUrl = helper.sign(params);
 
+                String price = null;
+
                 try{
                     UserAgent userAgent = new UserAgent();         //create new userAgent (headless browser).
                     userAgent.sendGET(requestUrl);   //send request
-                    System.out.println(userAgent.doc.innerXML());            //print the retrieved JSON object
-                    System.out.println(userAgent.doc.findFirst("LowestUsedPrice").findFirst("FormattedPrice").innerXML());            //print the retrieved JSON object
+
+                    price = userAgent.doc.findFirst("LowestUsedPrice").findFirst("FormattedPrice").innerXML();
 
                 }
                 catch(JauntException e){         //if an HTTP/connection error occurs, handle JauntException.
                     System.err.println(e);
                 }
+
+                String[] priceNoDollSign = price.split("\\$");
+                double priceDouble = Double.parseDouble(priceNoDollSign[1]);
+
+                book.setAmazon_price(priceDouble);
+
             }
         }
 
