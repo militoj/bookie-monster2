@@ -84,7 +84,7 @@ public class apiRequester {
                     UserAgent userAgent = new UserAgent();         //create new userAgent (headless browser).
                     userAgent.sendGET(requestUrl);   //send request
                     System.out.println(userAgent.doc.innerXML());            //print the retrieved JSON object
-                    System.out.println(userAgent.doc.findFirst("LowestUsedPrice").innerXML());            //print the retrieved JSON object
+                    System.out.println(userAgent.doc.findFirst("LowestUsedPrice").findFirst("FormattedPrice").innerXML());            //print the retrieved JSON object
 
                 }
                 catch(JauntException e){         //if an HTTP/connection error occurs, handle JauntException.
