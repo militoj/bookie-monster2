@@ -48,8 +48,14 @@ public class apiRequester {
          */
         private static final String ENDPOINT = "webservices.amazon.com";
 
-        public static void urlMaker(ArrayList<Book> booksToWrite) {
+    public static ArrayList<Book> bookList = null;
 
+
+    public static void urlMaker(ArrayList<Book> booksToWrite) {
+
+
+
+          bookList = booksToWrite;
         /*
          * Set up the signed requests helper.
          */
@@ -64,7 +70,7 @@ public class apiRequester {
 
             String requestUrl = null;
 
-            for (Book book: booksToWrite) {
+            for (Book book: bookList) {
 
                 Map<String, String> params = new HashMap<String, String>();
 
@@ -87,10 +93,13 @@ public class apiRequester {
                     userAgent.sendGET(requestUrl);   //send request
 
                     price = userAgent.doc.findFirst("LowestUsedPrice").findFirst("FormattedPrice").innerXML();
-
+                    Thread.sleep(1000);
                 }
                 catch(JauntException e){         //if an HTTP/connection error occurs, handle JauntException.
                     System.err.println(e);
+                }
+                catch (InterruptedException e) {
+                     System.err.println(e);
                 }
 
                 String[] priceNoDollSign = price.split("\\$");
@@ -100,6 +109,13 @@ public class apiRequester {
 
             }
         }
+
+
+    public static ArrayList<Book> toList() {
+
+        return bookList;
+    }
+
 
 
 }

@@ -21,9 +21,12 @@ public class BookDataWriter {
         //CSV file header
         private static final Object [] FILE_HEADER = {"id","quantity","isbn","price","amazon price"};
 
+
+
         public static void writeCsvFile(String fileName, ArrayList<Book> booksToWrite) {
 
 
+            ArrayList<Book> bookList =  booksToWrite;
             //Create a new list of student objects
 
 
@@ -46,7 +49,7 @@ public class BookDataWriter {
                 csvFilePrinter.printRecord(FILE_HEADER);
 
                 //Write a new student object list to the CSV file
-                for (Book book : booksToWrite) {
+                for (Book book : bookList) {
                     List bookDataRecord = new ArrayList();
                     bookDataRecord.add(book.getBuyer_name());
                     bookDataRecord.add(String.valueOf(book.getQuantity()));
@@ -72,6 +75,7 @@ public class BookDataWriter {
                 }
             }
         }
+
 
 
 }

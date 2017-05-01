@@ -46,10 +46,10 @@ public class Scraper {
                 count++;
             }
 
-            String fileName = System.getProperty("user.home")+"/git/bookies-revenge/src/main/resources/book_data.csv";
+            // String fileName = System.getProperty("user.home")+"/git/bookies-revenge/src/main/resources/book_data.csv";
 //            String fileName = "book_data.csv";
 
-            BookDataImporter.readCsvFile(fileName);
+            // BookDataImporter.readCsvFile(fileName);
 
 
         } catch (JauntException e) {                                     //if an HTTP/connection error occurs, handle JauntException.

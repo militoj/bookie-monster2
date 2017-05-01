@@ -28,11 +28,10 @@ public class Runner {
         ArrayList<Book> secondList = Scraper.toList();
 
         firstList.addAll(secondList);
-
         apiRequester.urlMaker(testList);
 
 
-        BookDataWriter.writeCsvFile("/Users/johnmilito/git/bookies-revenge/src/main/resources/BookFileNew.csv", testList);
+        BookDataWriter.writeCsvFile("/Users/johnmilito/git/bookies-revenge/src/main/resources/BookFileNew.csv", apiRequester.toList());
 
 
 

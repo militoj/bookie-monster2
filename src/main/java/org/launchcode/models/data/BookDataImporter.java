@@ -81,7 +81,6 @@ public class BookDataImporter {
     }
 
     public static ArrayList<Book> toList() {
-
         return importedBooks;
     }
 
