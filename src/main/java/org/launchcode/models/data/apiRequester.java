@@ -24,6 +24,8 @@ import org.w3c.dom.Node;
 public class apiRequester {
 
 
+
+
     /*
 * This class shows how to make a simple authenticated call to the
 * Amazon Product Advertising API.
@@ -55,7 +57,9 @@ public class apiRequester {
 
 
 
-          bookList = booksToWrite;
+
+
+        bookList = booksToWrite;
         /*
          * Set up the signed requests helper.
          */

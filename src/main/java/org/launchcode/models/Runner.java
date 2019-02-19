@@ -19,6 +19,9 @@ public class Runner {
 
 
     public static void main(String[]args){
+
+        System.out.println(" Runner!!");
+
         BookDataImporter.readCsvFile("/Users/johnmilito/git/bookies-revenge/src/main/resources/book_data.csv");
         Scraper.main();
 
